@@ -50,3 +50,8 @@ steps:
 
       echo "Deploy completed successfully!"
     displayName: Deploy to NGINX web root
+
+  - script: |
+      sudo apt update
+      sudo apt install nginx -y
+    displayName: 'Install NGINX'
