@@ -7,7 +7,7 @@ trigger:
   - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: TEST-SELF-HOST
 
 steps:
   - task: NodeTool@0
