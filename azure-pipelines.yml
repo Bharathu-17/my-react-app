@@ -37,8 +37,16 @@ steps:
       ArtifactName: 'drop'
     displayName: 'Publish build artifact'
 
-  # ✅ Deploy to local NGINX web root
+# Deploy to local NGINX web root
   - script: |
+      echo "Listing build output:"
+      ls -la $(Build.ArtifactStagingDirectory)
+
+      echo "Clearing existing NGINX root..."
       sudo rm -rf /var/www/html/*
+
+      echo "Copying files..."
       sudo cp -r $(Build.ArtifactStagingDirectory)/* /var/www/html/
-    displayName: 'Deploy to NGINX web root'
+
+      echo "Deploy completed successfully!"
+    displayName: Deploy to NGINX web root
