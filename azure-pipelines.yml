@@ -10,23 +10,35 @@ pool:
   name: TEST-SELF-HOST
 
 steps:
+  # Use Node.js
   - task: NodeTool@0
     inputs:
       versionSpec: '18.x'
     displayName: 'Use Node.js'
 
+  # Install dependencies & build React app
   - script: |
       npm install
       npm run build
     displayName: 'Install dependencies and build React app'
 
+  # Copy build output to staging
   - task: CopyFiles@2
     inputs:
       SourceFolder: 'build'
       Contents: '**'
       TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    displayName: 'Copy build to artifact staging'
 
+  # Publish build artifact (optional, good for backup)
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'drop'
+    displayName: 'Publish build artifact'
+
+  # ✅ Deploy to local NGINX web root
+  - script: |
+      sudo rm -rf /var/www/html/*
+      sudo cp -r $(Build.ArtifactStagingDirectory)/* /var/www/html/
+    displayName: 'Deploy to NGINX web root'
