@@ -18,9 +18,9 @@ steps:
 
   # Install dependencies & build React app
   - script: |
-      cd $(System.DefaultWorkingDirectory)
       npm install
       npm run build
+      workingDirectory: 'my-react-app'
     displayName: 'Install dependencies and build React app'
 
   # Copy build output to staging
