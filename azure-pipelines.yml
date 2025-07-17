@@ -18,6 +18,7 @@ steps:
 
   # Install dependencies & build React app
   - script: |
+      cd $(System.DefaultWorkingDirectory)
       npm install
       npm run build
     displayName: 'Install dependencies and build React app'
