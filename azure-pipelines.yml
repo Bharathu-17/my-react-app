@@ -18,8 +18,13 @@ steps:
 
   # Install dependencies & build React app
   - script: |
+      echo "Current directory: $(pwd)"
+      echo "List files in directory:"
+      ls -la
+
       echo "Node version:"
       node -v
+
       echo "NPM version:"
       npm -v
 
