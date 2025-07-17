@@ -18,10 +18,18 @@ steps:
 
   # Install dependencies & build React app
   - script: |
+      echo "Node version:"
+      node -v
+      echo "NPM version:"
+      npm -v
+
+      echo "Installing dependencies..."
       npm install
+
+      echo "Building the React app..."
       npm run build
-      workingDirectory: 'my-react-app'
     displayName: 'Install dependencies and build React app'
+    workingDirectory: '$(Build.SourcesDirectory)'
 
   # Copy build output to staging
   - task: CopyFiles@2
