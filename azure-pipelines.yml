@@ -39,6 +39,11 @@ steps:
 
 # Deploy to local NGINX web root
   - script: |
+      sudo apt update
+      sudo apt install nginx -y
+    displayName: 'Install NGINX'
+
+  - script: |
       echo "Listing build output:"
       ls -la $(Build.ArtifactStagingDirectory)
 
@@ -50,8 +55,3 @@ steps:
 
       echo "Deploy completed successfully!"
     displayName: Deploy to NGINX web root
-
-  - script: |
-      sudo apt update
-      sudo apt install nginx -y
-    displayName: 'Install NGINX'
